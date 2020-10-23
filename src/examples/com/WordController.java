@@ -27,20 +27,16 @@ public class WordController {
     public void selectLanguage() {
 
         try {
-            String s = wordView.inputLanguage();
-            switch (s) {
-                case "english" -> {
-                    map = data.englishWordConnection();
-                    System.out.println("TURKISH -> ENGLISH");
-                }
-                case "german" -> {
-                    map = data.germanWordConnection();
-                    System.out.println("TURKISH -> GERMAN");
-                }
-                case "exit" -> {
-                    System.out.println("---GOOD BY---");
-                    System.exit(0);
-                }
+            String choice = wordView.inputLanguage();
+            if ("english".equalsIgnoreCase(choice)) {
+                map = data.englishWordConnection();
+                wordView.englishLanguage();
+            } else if ("german".equalsIgnoreCase(choice)) {
+                map = data.germanWordConnection();
+                wordView.germanLanguage();
+            } else if ("exit".equalsIgnoreCase(choice)) {
+                wordView.systemExitMessage();
+                System.exit(0);
             }
         } catch (NullPointerException nullPointerException) {
             wordView.printNotFound();
@@ -66,7 +62,7 @@ public class WordController {
                         controller = true;
                         break;
                     } else if (input.equalsIgnoreCase("exit")) {
-                        System.out.println("---GOOD BY---");
+                        wordView.systemExitMessage();
                         System.exit(0);
                     }
                 }

@@ -11,7 +11,7 @@ public class WordView {
 
     public String inputLanguage() {
 
-        System.out.print("choose a dictionary(german or english) : ");
+        System.out.print("choose a dictionary: Turkish -> (German or English) : ");
 
         return scanner.nextLine();
     }
@@ -34,4 +34,20 @@ public class WordView {
 
     }
 
+    public void systemInformationMessages() {
+        System.out.println("System exit key : exit");
+        System.out.println("dictionary change key : change");
+    }
+
+    public void systemExitMessage() {
+        System.out.println("---GOOD BY---");
+    }
+
+    public void englishLanguage() {
+        System.out.println("TURKISH -> ENGLISH");
+    }
+
+    public void germanLanguage() {
+        System.out.println("TURKISH -> GERMAN");
+    }
 }

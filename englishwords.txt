@@ -49,3 +49,4 @@ bilgisayar = computer
 araba = car
 ev = house
 kapı = door
+öz = essence
