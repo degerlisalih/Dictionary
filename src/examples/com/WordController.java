@@ -26,19 +26,17 @@ public class WordController {
 
     public void selectLanguage() {
 
-        try {
-            String choice = wordView.inputLanguage();
-            if ("english".equalsIgnoreCase(choice)) {
-                map = data.englishWordConnection();
-                wordView.englishLanguage();
-            } else if ("german".equalsIgnoreCase(choice)) {
-                map = data.germanWordConnection();
-                wordView.germanLanguage();
-            } else if ("exit".equalsIgnoreCase(choice)) {
-                wordView.systemExitMessage();
-                System.exit(0);
-            }
-        } catch (NullPointerException nullPointerException) {
+        String choice = wordView.inputLanguage();
+        if ("english".equalsIgnoreCase(choice)) {
+            map = data.englishWordConnection();
+            wordView.englishLanguage();
+        } else if ("german".equalsIgnoreCase(choice)) {
+            map = data.germanWordConnection();
+            wordView.germanLanguage();
+        } else if ("exit".equalsIgnoreCase(choice)) {
+            wordView.systemExitMessage();
+            System.exit(0);
+        } else {
             wordView.printNotFound();
             selectLanguage();
         }
@@ -53,24 +51,19 @@ public class WordController {
             selectLanguage();
         } else {
 
-            try {
-                for (Map.Entry<String, String> entry : map.entrySet()) {
-                    // it tries to find input in the map
-                    if (entry.getKey().equalsIgnoreCase(input)) {
-                        wordModel.setWord(entry.getKey());
-                        wordModel.setMeaning(entry.getValue());
-                        controller = true;
-                        break;
-                    } else if (input.equalsIgnoreCase("exit")) {
-                        wordView.systemExitMessage();
-                        System.exit(0);
-                    }
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                // it tries to find input in the map
+                if (entry.getKey().equalsIgnoreCase(input)) {
+                    wordModel.setWord(entry.getKey());
+                    wordModel.setMeaning(entry.getValue());
+                    controller = true;
+                    break;
+                } else if (input.equalsIgnoreCase("exit")) {
+                    wordView.systemExitMessage();
+                    System.exit(0);
                 }
-
-            } catch (NullPointerException nullPointerException) {
-                wordView.printNotFound();
-                selectLanguage();
             }
+
             if (!controller) {
                 wordModel.setWord("<- object not found");
                 wordModel.setMeaning("");
