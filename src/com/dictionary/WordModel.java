@@ -1,4 +1,5 @@
-package examples.com;
+
+package com.dictionary;
 
 /*
  * this is the model class and it determines types of variables
@@ -6,15 +7,16 @@ package examples.com;
 
 public class WordModel {
 
-    private String word;
-    private String meaning;
+    private static String word;
+    private static String meaning;
 
     public String getWord() {
         return word;
     }
 
     public void setWord(String word) {
-        this.word = word;
+
+        WordModel.word = word;
     }
 
     public String getMeaning() {
@@ -22,6 +24,6 @@ public class WordModel {
     }
 
     public void setMeaning(String meaning) {
-        this.meaning = meaning;
+        WordModel.meaning = meaning;
     }
 }

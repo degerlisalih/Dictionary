@@ -1,40 +1,35 @@
-package examples.com;
+package com.dictionary;
 /*
  *  This is the view class and it takes an input from user and shows the word and meaning
  */
 
-import java.util.Scanner;
 
-public class WordView {
+public class WordView extends WordModel {
 
-    public static Scanner scanner = new Scanner(System.in);
-
-    public String inputLanguage() {
+    public void inputLanguage() {
 
         System.out.print("choose a dictionary: Turkish -> (German or English) : ");
 
-        return scanner.nextLine();
     }
 
-    public String inputWord() {
+    public void inputWord() {
 
         System.out.print("enter a word : ");
 
-        return scanner.nextLine();
     }
 
-    public void print(String word, String meaning) {
+    public void printWordMeaning() {
 
-        System.out.println(word + " -> " + meaning);
+        System.out.println(getWord() + " -> " + getMeaning());
     }
 
-    public void printNotFound() {
+    public void dictionaryNotFound() {
 
         System.out.println("<- dictionary not found ->");
 
     }
 
-    public void systemInformationMessages() {
+    public void systemInformation() {
         System.out.println("System exit key : exit");
         System.out.println("dictionary change key : change");
     }
@@ -43,11 +38,11 @@ public class WordView {
         System.out.println("---GOOD BY---");
     }
 
-    public void englishLanguage() {
+    public void englishLanguageInfo() {
         System.out.println("TURKISH -> ENGLISH");
     }
 
-    public void germanLanguage() {
+    public void germanLanguageInfo() {
         System.out.println("TURKISH -> GERMAN");
     }
 }

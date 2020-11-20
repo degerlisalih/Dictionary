@@ -1,19 +1,21 @@
-package examples.com;
-/*
- * This is the Controller class. It makes coordination between WordModel and WordView classes
- * Besides it selects language vocabulary , finds the input word in the map and
- * updates word and meaning to the WordView
- */
+package com.dictionary;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
+
+/*
+ * This is the Controller class. It makes coordination between WordModel and WordView classes
+ */
 
 public class WordController {
 
+    Scanner scanner = new Scanner(System.in);
+
+    private HashMap<String, String> wordControllerMap;
     private final WordModel wordModel;
     private final Data data;
     private final WordView wordView;
-
 
     public WordController(WordModel wordModel, Data data, WordView wordView) {
         this.wordModel = wordModel;
@@ -21,37 +23,41 @@ public class WordController {
         this.wordView = wordView;
     }
 
-
-    public HashMap<String, String> map = null;
+    /*
+     *it selects language vocabulary
+     */
 
     public void selectLanguage() {
-
-        String choice = wordView.inputLanguage();
+        wordView.inputLanguage();
+        String choice = scanner.nextLine();
         if ("english".equalsIgnoreCase(choice)) {
-            map = data.englishWordConnection();
-            wordView.englishLanguage();
+            wordControllerMap = data.getEnglishVocabularyMap();
+            wordView.englishLanguageInfo();
         } else if ("german".equalsIgnoreCase(choice)) {
-            map = data.germanWordConnection();
-            wordView.germanLanguage();
+            wordControllerMap = data.getGermanVocabularyMap();
+            wordView.germanLanguageInfo();
         } else if ("exit".equalsIgnoreCase(choice)) {
             wordView.systemExitMessage();
             System.exit(0);
         } else {
-            wordView.printNotFound();
+            wordView.dictionaryNotFound();
             selectLanguage();
         }
     }
 
-
+    /*
+     *finds the input word in the map
+     */
     public void finder() {
 
         boolean controller = false;
-        String input = wordView.inputWord();
+        wordView.inputWord();
+        String input = scanner.nextLine();
         if (input.equalsIgnoreCase("change")) {
             selectLanguage();
         } else {
 
-            for (Map.Entry<String, String> entry : map.entrySet()) {
+            for (Map.Entry<String, String> entry : wordControllerMap.entrySet()) {
                 // it tries to find input in the map
                 if (entry.getKey().equalsIgnoreCase(input)) {
                     wordModel.setWord(entry.getKey());
@@ -68,7 +74,10 @@ public class WordController {
                 wordModel.setWord("<- object not found");
                 wordModel.setMeaning("");
             }
-            wordView.print(wordModel.getWord(), wordModel.getMeaning());
+            /*
+             *  updates word and meaning to the WordView
+             */
+            wordView.printWordMeaning();
         }
     }
 
