@@ -11,10 +11,8 @@ import java.util.Scanner;
  */
 public class Data {
 
-    private String dictionary;
-    private HashMap<String, String> englishVocabularyMap;
-    private HashMap<String, String> germanVocabularyMap;
-    private final HashMap<String, String> VocabularyMap = new HashMap<>();
+    private final HashMap<String, String> englishVocabularyMap =new HashMap<>();
+    private final HashMap<String, String> germanVocabularyMap =new HashMap<>();
 
     public Data() {
         setEnglishVocabularyMap();
@@ -26,8 +24,8 @@ public class Data {
     }
 
     public void setEnglishVocabularyMap() {
-        this.dictionary = "englishWords.txt";
-        this.englishVocabularyMap = connectFile();
+
+        connectFile("englishWords.txt",englishVocabularyMap);
     }
 
     public HashMap<String, String> getGermanVocabularyMap() {
@@ -35,12 +33,12 @@ public class Data {
     }
 
     public void setGermanVocabularyMap() {
-        this.dictionary = "germanWords.txt";
-        this.germanVocabularyMap = connectFile();
+
+         connectFile("germanWords.txt",germanVocabularyMap);
     }
 
     /*This method finds txt file and extract data from the txt file to Vocabulary hashmap*/
-    public HashMap<String, String> connectFile() {
+    public void connectFile(String dictionary, HashMap<String, String> VocabularyMap ) {
 
         try {
 
@@ -57,6 +55,5 @@ public class Data {
             System.out.println("exception!! : " + ioException);
         }
 
-        return VocabularyMap;
     }
 }
